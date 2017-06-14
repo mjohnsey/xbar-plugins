@@ -1,0 +1,15 @@
+{
+  "name": "bitbar_plugins",
+  "version": "1.0.0",
+  "description": "This is where my plugins live",
+  "main": "bitcoin.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "coinbase": "^2.0.6",
+    "lodash": "^4.17.4"
+  }
+}
