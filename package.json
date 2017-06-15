@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bitbar": "^0.3.0",
     "coinbase": "^2.0.6",
     "lodash": "^4.17.4"
   }
