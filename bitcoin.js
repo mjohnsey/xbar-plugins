@@ -64,7 +64,7 @@ try {
       bitbar.sep,
       { text: 'Coinbase', href: 'https://coinbase.com' },
       { text: 'Coindesk', href: 'https://coindesk.com' },
-      { text: 'Coinigy', href: 'https://www.coinigy.com/main/markets/BITF/BTC/USD' },
+      { text: 'GDAX', href: 'https://www.gdax.com/trade/BTC-USD' },
     ]);
   };
 
