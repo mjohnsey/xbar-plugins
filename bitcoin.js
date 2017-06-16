@@ -1,10 +1,8 @@
 /* eslint no-console: ["error", { allow: ["error"] }] */
 const coinbase = require('coinbase');
-const https = require('https');
 const _ = require('lodash');
 const bitbar = require('bitbar');
-// https://www.promisejs.org/
-// const Promise = require('promise');
+const rp = require('request-promise-native');
 
 try {
   // uses the bitfinex API http://docs.bitfinex.com/
@@ -69,14 +67,23 @@ try {
   };
 
   client.getAccount(coinbaseAccountId, (err, account) => {
-    https.get(tickerUrl, (res) => {
-      if (res.headers['content-type'] !== 'application/json; charset=utf-8') {
-        throw new Error(`Did not return JSON! Response type: ${res.headers['content-type']}`);
-      }
-      res.on('data', data => handleCoinbaseResponse(account, data));
-    }).on('error', (httpErr) => {
-      throw httpErr;
-    });
+    const options = {
+      method: 'GET',
+      uri: tickerUrl,
+      resolveWithFullResponse: true,
+    };
+    rp(options)
+      .then((res) => {
+        if (res.headers['content-type'] !== 'application/json; charset=utf-8') {
+          throw new Error(`Did not return JSON! Response type: ${res.headers['content-type']}`);
+        }
+        handleCoinbaseResponse(account, res.body);
+      })
+      .catch((httpErr) => {
+        console.error('Here i am');
+        console.error(httpErr);
+        throw httpErr;
+      });
   });
 } catch (err) {
   console.error(err);
