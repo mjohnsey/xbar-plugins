@@ -22,9 +22,9 @@ end
 puts "#{time.strftime(TIME_FORMAT_24)} UTC"
 puts '---'
 zones = {
-  Memphis: -6,
-  Merrisa: -5,
-  Sensorly: 1
+  'Memphis': -6,
+  'Merrisa and Chip': -5,
+  'Angela': -8
 }
 zones.each do |k, v|
   puts time_print(time, k, zone_print(v))
