@@ -11,8 +11,7 @@ try {
   // const statusUrl = `${baseApiUrl}/stats/BTCUSD`;
   const bitcoinSymbol = 'Ƀ';
   const ethereumSymbol = 'Ξ';
-  const bigmoneySymbol = '🤑';
-  const bigmoneyAmount = 1245.0;
+  const bigmoneyAmount = 2400.0;
 
   // # Coinbase API - https://www.coinbase.com/settings/api
   const coinbaseApiKey = process.env.COINBASE_API_KEY;
@@ -25,7 +24,6 @@ try {
 
   const client = new coinbase.Client({ apiKey: coinbaseApiKey, apiSecret: coinbaseApiSecret });
 
-
   const getTickerUrl = function getTickerUrl(baseUrl, symbol) {
     // FIXME: add check that symbol in this list
     // ["btcusd","ltcusd","ltcbtc","ethusd","ethbtc","etcbtc","etcusd","rrtusd",
@@ -37,16 +35,23 @@ try {
   const tickerUrl = getTickerUrl(baseApiUrl, 'btcusd');
   // const ethTickerUrl = getTickerUrl(baseApiUrl, 'ethusd');
 
-  const handleCoinbaseResponse = function handleCoinbaseResponse(account, data) {
+  const parseLastPrice = function parseLastPrice(data) {
     // { mid: '769.795', bid: '769.79', ask: '769.8', last_price: '769.8',
     // low: '765.0', high: '772.72', volume: '3675.99258378', timestamp: '1481316120.69769026' }
     const responseJson = JSON.parse(data);
     const lastPrice = responseJson.last_price;
-    const lastPriceParsed = parseFloat(responseJson.last_price).toFixed(2);
-    let currentPrice = `${bitcoinSymbol} ${lastPriceParsed || lastPrice}`;
-    if (lastPriceParsed && lastPriceParsed > bigmoneyAmount) {
-      currentPrice = `${currentPrice} ${bigmoneySymbol}`;
-    }
+    return lastPrice;
+  };
+
+  const prettyPrintLastPrice = function prettyPrintLastPrice(symbol, lastPrice, bigMoneyAmount, bigMoneySymbol = '🤑') {
+    const lastPriceParsed = parseFloat(lastPrice).toFixed(2);
+    const currentPrice = `${symbol} ${lastPriceParsed || lastPrice}${lastPriceParsed > bigMoneyAmount ? `${bigMoneySymbol}` : ''}`;
+    return currentPrice;
+  };
+
+  const handleCoinbaseResponse = function handleCoinbaseResponse(account, data) {
+    const lastPrice = parseLastPrice(data);
+    const currentPrice = prettyPrintLastPrice(bitcoinSymbol, lastPrice, bigmoneyAmount);
     bitbar([
       {
         text: currentPrice,
@@ -54,7 +59,7 @@ try {
       bitbar.sep,
       { text: 'Bitcoin' },
       { text: `Wallet Balance: ${bitcoinSymbol}${account.balance.amount}` },
-      { text: `Wallet Balance: $${account.balance.amount * responseJson.last_price}` },
+      { text: `Wallet Balance: $${account.balance.amount * lastPrice}` },
       bitbar.sep,
       { text: 'Ether' },
       { text: `Wallet Balance: ${ethereumSymbol}${'TODO'}` },
