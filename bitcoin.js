@@ -3,6 +3,8 @@ const coinbase = require('coinbase');
 const _ = require('lodash');
 const bitbar = require('bitbar');
 const rp = require('request-promise-native');
+const { promisify } = require('util');
+
 
 try {
   // uses the bitfinex API http://docs.bitfinex.com/
@@ -44,22 +46,31 @@ try {
   };
 
   const prettyPrintLastPrice = function prettyPrintLastPrice(symbol, lastPrice, bigMoneyAmount, bigMoneySymbol = '🤑') {
-    const lastPriceParsed = parseFloat(lastPrice).toFixed(2);
-    const currentPrice = `${symbol} ${lastPriceParsed || lastPrice}${lastPriceParsed > bigMoneyAmount ? `${bigMoneySymbol}` : ''}`;
+    const lastPriceRounded = parseFloat(lastPrice).toFixed(2);
+    const currentPrice = `${symbol} ${lastPriceRounded || lastPrice}${lastPriceRounded > bigMoneyAmount ? `${bigMoneySymbol}` : ''}`;
     return currentPrice;
+  };
+
+  const parseCoinbaseAccount = function parseCoinbaseAccount(account, symbol, lastPrice) {
+    const result = {};
+    const accountBalance = account.balance.amount;
+    result.cryptoBalance = `${symbol}${accountBalance}`;
+    result.usdBalance = `$${accountBalance * lastPrice}`;
+    return result;
   };
 
   const handleCoinbaseResponse = function handleCoinbaseResponse(account, data) {
     const lastPrice = parseLastPrice(data);
     const currentPrice = prettyPrintLastPrice(bitcoinSymbol, lastPrice, bigmoneyAmount);
+    const parsedAccount = parseCoinbaseAccount(account, bitcoinSymbol, lastPrice);
     bitbar([
       {
         text: currentPrice,
       },
       bitbar.sep,
       { text: 'Bitcoin' },
-      { text: `Wallet Balance: ${bitcoinSymbol}${account.balance.amount}` },
-      { text: `Wallet Balance: $${account.balance.amount * lastPrice}` },
+      { text: `Wallet Balance: ${parsedAccount.cryptoBalance}` },
+      { text: `Wallet Balance: ${parsedAccount.usdBalance}` },
       bitbar.sep,
       { text: 'Ether' },
       { text: `Wallet Balance: ${ethereumSymbol}${'TODO'}` },
@@ -71,25 +82,20 @@ try {
     ]);
   };
 
-  client.getAccount(coinbaseAccountId, (err, account) => {
+  const main = async function main() {
+    const promisifiedGetAccount = promisify(client.getAccount.bind(client));
+    const btcAccount = await promisifiedGetAccount(coinbaseAccountId);
     const options = {
       method: 'GET',
       uri: tickerUrl,
       resolveWithFullResponse: true,
     };
-    rp(options)
-      .then((res) => {
-        if (res.headers['content-type'] !== 'application/json; charset=utf-8') {
-          throw new Error(`Did not return JSON! Response type: ${res.headers['content-type']}`);
-        }
-        handleCoinbaseResponse(account, res.body);
-      })
-      .catch((httpErr) => {
-        console.error('Here i am');
-        console.error(httpErr);
-        throw httpErr;
-      });
-  });
+    //
+    const res = await rp(options);
+    handleCoinbaseResponse(btcAccount, res.body);
+  };
+
+  main();
 } catch (err) {
   console.error(err);
 }
