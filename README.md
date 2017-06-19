@@ -16,7 +16,7 @@ You just need to pass in your account number + your API Key and Secret.
 
 How to run:
 ```bash
-node ./crypto.js --accountId $COINBASE_BTC_ACCOUNT_ID --coinbaseApiKey $COINBASE_API_KEY --coinbaseApiSecret $COINBASE_API_SECRET --bigMoneyAmount 2500.0
+node ./crypto.js --accountId $COINBASE_BTC_ACCOUNT_ID --coinbaseApiKey $COINBASE_API_KEY --coinbaseApiSecret $COINBASE_API_SECRET --bigMoneyAmount 2500.0 --gdaxApiKey $GDAX_API_KEY --gdaxPassphrase $GDAX_API_PASSPHRASE --gdaxSecret $GDAX_API_SECRET
 ```
 
 ## Time
