@@ -1,5 +1,10 @@
 # Bitbar Plugins
-This is where my Bitbar plugin code lives. You need to create runner/wrapper scripts in your Bitbar plugin folder usually located at `$HOME/bitbar_plugins`.
+This is where my [Bitbar](https://getbitbar.com/) plugin code lives. You need to symlink the runner/wrapper from `timed_scripts` in your Bitbar plugin folder usually located at `$HOME/bitbar_plugins`.
+
+To install bitbar:
+```bash
+brew cask install bitbar
+```
 
 ## Hipchat
 This scrapes the Hipchat status page and shows whether `Login`, `Send message`, or `Receive message` functionality is down.
