@@ -115,6 +115,10 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
+bindings@^1.2.0:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.2.1.tgz#14ad6113812d2d37d72e67b4cacb4bb726505f11"
+
 bintrees@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/bintrees/-/bintrees-1.0.0.tgz#9ea09a6672c1134b5e8c4313a13e47cca968c720"
@@ -999,6 +1003,10 @@ mute-stream@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
 
+nan@^2.2.0:
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/nan/-/nan-2.6.2.tgz#e4ff34e6c95fdfb5aecc08de6596f43605a7db45"
+
 natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
@@ -1447,6 +1455,14 @@ text-table@~0.2.0:
 through@^2.3.6:
   version "2.3.8"
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
+
+time@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/time/-/time-0.12.0.tgz#755414bc3ef0a2ea44ce9f775bd3cf664ec49bb7"
+  dependencies:
+    bindings "^1.2.0"
+    debug "^2.2.0"
+    nan "^2.2.0"
 
 tmp@^0.0.31:
   version "0.0.31"
