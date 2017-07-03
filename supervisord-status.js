@@ -24,11 +24,25 @@ const getSupePage = async function getSupePage(url, username, password) {
 };
 
 const parseSupeRow = function processSupeRow($, row) {
+  const result = {};
   const tds = $(row).find('td');
   const processStatus = $(tds[0]).text();
+  result.status = processStatus;
   const processName = $(tds[2]).text();
+  result.name = processName;
   const isRunning = _.lowerCase(processStatus) === 'running';
-  return { status: processStatus, name: processName, isRunning };
+  result.isRunning = isRunning;
+  const processDetails = $(tds[1]).text();
+  if (isRunning) {
+    const splits = _.split(processDetails, ', ');
+    const fullUptime = splits[1];
+    const uptime = fullUptime.replace('uptime ', '');
+    result.uptime = uptime;
+  } else {
+    const downSince = `${processDetails} UTC`;
+    result.downSince = downSince;
+  }
+  return result;
 };
 
 const parseSupePage = function parseSupePage(body) {
@@ -44,7 +58,15 @@ const parseSupePage = function parseSupePage(body) {
 };
 
 const prettyPrintSupes = function prettyPrintSupes(supes) {
-  const pp = _.map(supes, supe => `${supe.name} - ${supe.status}`);
+  const pp = _.map(supes, (supe) => {
+    let base = `${supe.name} - ${supe.status}`;
+    if (supe.isRunning) {
+      base = `${base}(${supe.uptime})`;
+    } else {
+      base = `${base}(${supe.downSince})`;
+    }
+    return base;
+  });
   return _.join(pp, '\n');
 };
 
