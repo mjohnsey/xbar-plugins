@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "bitbar": "^0.3.0",
+    "cheerio": "^1.0.0-rc.2",
     "coinbase": "^2.0.6",
     "gdax": "^0.4.2",
     "lodash": "^4.17.4",
