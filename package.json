@@ -15,12 +15,15 @@
     "gdax": "^0.4.2",
     "lodash": "^4.17.4",
     "minimist": "^1.2.0",
+    "pg": "^7.2.0",
+    "pg-promise": "^6.5.1",
     "request": "^2.81.0",
     "request-promise-native": "^1.0.4",
-    "time": "^0.12.0"
+    "time": "^0.12.0",
+    "timezone": "^1.0.6"
   },
   "devDependencies": {
-    "eslint": "^4.0.0",
+    "eslint": "^4.2.0",
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-plugin-import": "^2.3.0"
   }
