@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 require 'rubygems'
 require 'tzinfo'
 
 time = Time.now.utc
-TIME_FORMAT_24 = '%H:%M'.freeze
-TIME_FORMAT_12 = '%I:%M %p'.freeze
+TIME_FORMAT_24 = '%H:%M'
+TIME_FORMAT_12 = '%I:%M %p'
 
 def zone_print(hour_offset)
   daylight_savings = Time.now.dst?
-  neg_pos = hour_offset > 0 ? '+' : '-'
+  neg_pos = hour_offset.positive? ? '+' : '-'
   hour = daylight_savings ? hour_offset + 1 : hour_offset
   hour_print = "#{neg_pos}#{hour.abs.to_s.rjust(2, '0')}"
   "#{hour_print}:00"
@@ -23,8 +25,8 @@ puts "#{time.strftime(TIME_FORMAT_24)} UTC"
 puts '---'
 zones = {
   'Memphis': -6,
-  'Merrisa and Chip': -5,
-  'Angela': -8
+  'Merrisa': -5,
+  'Seattle': -8
 }
 zones.each do |k, v|
   puts time_print(time, k, zone_print(v))
