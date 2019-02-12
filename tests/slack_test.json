@@ -1,0 +1,9 @@
+{"id":"622","date_created":"2019-02-11T23:24:16-08:00","date_updated":"2019-02-11T23:24:16-08:00","title":"Trouble with importing HipChat and Stride messages","type":"incident","status":"active","url":"https:\/\/status.slack.com\/2019-02\/5cce6446b18753c8","services":["Login/SSO","Messaging",
+        "Posts/Files",
+        "Calls",
+        "Apps/Integrations/APIs",
+        "Connections",
+        "Link Previews",
+        "Notifications",
+        "Search",
+        "Workspace/Org Administration"],"notes":[{"date_created":"2019-02-11T23:24:16-08:00","body":"We\u2019ve seen reports that some people are having trouble with importing messages from HipChat and Stride into Slack workspaces. We\u2019re investigating and we\u2019ll keep you posted on any updates."}]}
