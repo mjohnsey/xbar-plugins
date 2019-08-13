@@ -20,7 +20,10 @@
     "request": "^2.81.0",
     "request-promise-native": "^1.0.4",
     "time": "^0.12.0",
-    "timezone": "^1.0.6"
+    "timezone": "^1.0.6",
+    "tunnel-agent": "^0.6.0",
+    "cryptiles": "^4.1.2",
+    "ws": "^3.3.1"
   },
   "devDependencies": {
     "eslint": "^4.2.0",
