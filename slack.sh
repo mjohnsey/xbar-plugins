@@ -12,8 +12,7 @@ up_status="👌"
 status_light="${down_status}"
 error_msg=""
 services=""
-if [ "${status}" = "ok" ]
-then
+if [ "${status}" = "ok" ]; then
     status_light="${up_status}"
 else
     error_msg="${status}"
@@ -25,12 +24,12 @@ fi
 
 echo ${status_light}
 echo "---"
-if [ "${error_msg}" != "" ]
-then
+if [ "${error_msg}" != "" ]; then
     echo "Type: ${type}|href=${incident_url}"
     echo "Affected Services:"
     echo "${services}"
     echo "Start Time: ${date_create}"
 fi
 
-echo "Last checked: $(date "+%Y%m%d %H:%M:%S")"
+echo "Slack status|href=https://status.slack.com/"
+echo "Last checked: $(date "+%Y-%m-%d %H:%M:%S")"
