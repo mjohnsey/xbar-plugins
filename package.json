@@ -1,29 +1,15 @@
 {
   "name": "bitbar_plugins",
   "version": "1.0.0",
-  "description": "This is where my plugins live",
-  "main": "bitcoin.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
+  "description": "Bitbar plugins to make my life easier",
+  "author": "Michael Johnsey",
   "license": "ISC",
   "dependencies": {
-    "bitbar": "^0.3.0",
-    "cheerio": "^1.0.0-rc.2",
-    "coinbase": "^2.0.6",
-    "gdax": "^0.4.2",
+    "bitbar": "^1.2.0",
+    "coinbase": "^2.0.8",
+    "coinbase-pro": "^0.9.0",
     "lodash": "^4.17.13",
-    "minimist": "^1.2.0",
-    "pg": "^7.2.0",
-    "pg-promise": "^6.5.1",
-    "request": "^2.81.0",
-    "request-promise-native": "^1.0.4",
-    "time": "^0.12.0",
-    "timezone": "^1.0.6",
-    "tunnel-agent": "^0.6.0",
-    "cryptiles": "^4.1.2",
-    "ws": "^3.3.1"
+    "minimist": "^1.2.0"
   },
   "devDependencies": {
     "eslint": "^4.2.0",

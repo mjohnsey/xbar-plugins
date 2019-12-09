@@ -4,7 +4,7 @@ const _ = require('lodash');
 const bitbar = require('bitbar');
 const { promisify } = require('util');
 const minimist = require('minimist');
-const Gdax = require('gdax');
+const Gdax = require('coinbase-pro');
 
 const roundMoney = function roundMoney(moneyAmt, decimalPlaces = 2) {
   const rounded = parseFloat(moneyAmt).toFixed(decimalPlaces);
@@ -49,7 +49,7 @@ const getCurrencyPair = function getCurrencyPair(currency, converted = 'USD') {
 const gdaxAccountByCurrency = function gdaxAccountByCurrency(accounts, currency) {
   const acct = _.find(accounts, { currency });
   return acct;
-}
+};
 
 const parseGdaxAccount = function parseGdaxAccount(resp, currency) {
   const gdaxAccounts = JSON.parse(resp.body);
@@ -98,14 +98,14 @@ const main = async function main() {
     {
       text: ppCurrentPrice,
     },
-    bitbar.sep,
+    bitbar.separator,
     { text: parsedAccount.currency },
     { text: `Wallet Balance: ${parsedAccount.symbol} ${parsedAccount.cryptoBalance}` },
     { text: `Wallet Balance: $${parsedAccount.usdBalance}` },
     { text: `GDAX Balance: ${parsedAccount.symbol} ${gdaxAccount.balance} - $${roundMoney(gdaxAccount.balance * currentPrice)}` },
     { text: `GDAX Available: ${parsedAccount.symbol} ${gdaxAccount.available} - $${roundMoney(gdaxAccount.available * currentPrice)}` },
     { text: `GDAX Hold: ${parsedAccount.symbol} ${gdaxAccount.hold} - $${roundMoney(gdaxAccount.hold * currentPrice)}` },
-    bitbar.sep,
+    bitbar.separator,
     { text: 'Coinbase', href: 'https://coinbase.com' },
     { text: 'GDAX', href: `https://www.gdax.com/trade/${currencyPair}` },
   ]);
