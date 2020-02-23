@@ -1,5 +1,6 @@
 #! /bin/bash
 
+brew update &>/dev/null
 brew_outdated_output=$(/usr/local/bin/brew outdated)
 # TODO: To test use this file
 # BASEDIR=$(dirname "$0")
