@@ -1,7 +1,7 @@
 #!/bin/bash
 source $HOME/.aliases
 RUNNER="$BITBAR_SRC/crypto.js"
-node $RUNNER --accountId $COINBASE_LTC_ACCOUNT_ID \
+/usr/local/bin/node $RUNNER --accountId $COINBASE_LTC_ACCOUNT_ID \
     --coinbaseApiKey $COINBASE_API_KEY \
     --coinbaseApiSecret $COINBASE_API_SECRET \
     --bigMoneyAmount ${LTC_BIGMONEY} \
