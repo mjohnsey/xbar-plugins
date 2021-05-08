@@ -7,7 +7,7 @@
   "dependencies": {
     "bitbar": "^1.2.0",
     "coinbase-pro": "^0.9.0",
-    "lodash": "^4.17.13",
+    "lodash": "^4.17.21",
     "minimist": "^1.2.0"
   },
   "devDependencies": {
