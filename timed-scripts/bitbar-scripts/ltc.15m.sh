@@ -1,10 +1,5 @@
 #!/bin/bash
-source $HOME/.aliases
-RUNNER="$BITBAR_SRC/crypto.js"
-/usr/local/bin/node $RUNNER --accountId $COINBASE_LTC_ACCOUNT_ID \
-    --coinbaseApiKey $COINBASE_API_KEY \
-    --coinbaseApiSecret $COINBASE_API_SECRET \
-    --bigMoneyAmount ${LTC_BIGMONEY} \
-    --gdaxApiKey $GDAX_API_KEY \
-    --gdaxPassphrase $GDAX_API_PASSPHRASE \
-    --gdaxSecret $GDAX_API_SECRET
+source ${HOME}/.aliases
+/usr/local/bin/docker run --rm \
+    -v ${HOME}/.config/coin-check/config.toml:/root/.config/coin-check/config.toml \
+    docker.pkg.github.com/mjohnsey/coin-check/coin-check:latest price LTC -f bitbar
