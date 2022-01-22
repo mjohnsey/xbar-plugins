@@ -1,5 +1,5 @@
 #!/bin/bash
 source ${HOME}/.aliases
 /usr/local/bin/docker run --rm \
-    -v ${HOME}/.go-time.toml:/root/.go-time.toml \
-    docker.pkg.github.com/mjohnsey/go-time/go-time:amd64-latest
+    -v ${HOME}/.config/go-time/go-time.toml:/root/.go-time.toml \
+    ghcr.io/mjohnsey/go-time/go-time:latest
