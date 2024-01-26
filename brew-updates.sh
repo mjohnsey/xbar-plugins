@@ -1,7 +1,7 @@
 #! /bin/bash
 
-brew update &>/dev/null
-brew_outdated_output=$(/usr/local/bin/brew outdated)
+/opt/homebrew/bin/brew update &>/dev/null
+brew_outdated_output=$(/opt/homebrew/bin/brew outdated)
 # TODO: To test use this file
 # BASEDIR=$(dirname "$0")
 # brew_outdated_output=$(cat ${BASEDIR}/../../tests/brew-outdated-test.txt)
